@@ -3,10 +3,16 @@ import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
   padding: 2rem;
   background: linear-gradient(to right, #574ae2, #222a68);
+
+  @media (max-width: 520px) {
+    justify-content: center;
+    gap: 1rem;
+  }
 `;
 
 export const Div = styled.div`

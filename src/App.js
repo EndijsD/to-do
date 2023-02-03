@@ -8,15 +8,16 @@ import { useState } from 'react';
 function App() {
   const [value, setValue] = useState('');
 
-  const getValue = (data) => {
-    setValue(data);
+  // Activates when the user types something in the search bar
+  const handleSearchInputChange = (e) => {
+    setValue(e.target.value);
   };
 
   return (
     <Router>
-      <Header handleValue={getValue} />
+      <Header handleInputChange={handleSearchInputChange} value={value} />
       <Routes>
-        <Route path="/" element={<Home searchValue={value} />} />
+        <Route path="/" element={<Home value={value} />} />
         <Route path="/create" element={<Form title="Create a New Task" />} />
         <Route path="/edit/:id" element={<Form title="Edit the Task" />} />
         <Route

@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 
 export const Content = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); //10rem
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+
+  @media (max-width: 20rem) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
 `;
 
 export const P = styled.p`
@@ -28,7 +32,7 @@ export const H1 = styled.h1`
 `;
 
 export const Item = styled.div`
-  margin: 2rem; //1rem 0
+  margin: 2rem;
   padding: 1rem;
   border-radius: 20px;
   box-shadow: 0px 0px 5px #abd2fa;
@@ -41,6 +45,10 @@ export const Item = styled.div`
   &:hover {
     background: #eee;
     border: 1px solid black;
+  }
+
+  @media (max-width: 20rem) {
+    margin: 1rem 0;
   }
 `;
 

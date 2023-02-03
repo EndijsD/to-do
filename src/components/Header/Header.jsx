@@ -1,12 +1,7 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 
-const Header = ({ handleValue }) => {
-  const [searchInput, setSearchInput] = useState('');
-  useEffect(() => {
-    handleValue(searchInput);
-  });
+const Header = ({ handleInputChange, value }) => {
   const navigate = useNavigate();
 
   return (
@@ -20,8 +15,9 @@ const Header = ({ handleValue }) => {
           type="search"
           placeholder="🔍︎ Search"
           onClick={() => navigate('/')}
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
+          value={value}
+          // When typed in, calls the function located in App.js
+          onChange={handleInputChange}
         />
       </S.Nav>
     </header>
