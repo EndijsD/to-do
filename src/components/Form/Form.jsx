@@ -15,11 +15,10 @@ const Form = ({ title }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [taskDoesNotExist, setTaskDoesNotExist] = useState(false);
-  const allTasks = JSON.parse(localStorage.getItem('tasks'));
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
+    const allTasks = JSON.parse(localStorage.getItem('tasks'));
     // If the task existed keep the old ID else create a new one
     const idLocal = formValues.id ? formValues.id : UUID4();
 
@@ -65,6 +64,7 @@ const Form = ({ title }) => {
 
   useEffect(() => {
     if (id) {
+      const allTasks = JSON.parse(localStorage.getItem('tasks'));
       const editTask = allTasks.find((task) => task.id === id);
 
       if (editTask) {

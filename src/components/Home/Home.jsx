@@ -9,12 +9,13 @@ const Home = ({ value }) => {
   };
 
   const deleteTask = (id) => {
-    const updatedTasks = tasks.filter((item) => item.id !== id);
-
-    // If no tasks left then remove the item from localStorage else remove the task
-    !updatedTasks.length
-      ? localStorage.removeItem('tasks')
-      : localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    // If only one task left then remove the item from localStorage else remove the specified task
+    if (tasks.length === 1) {
+      localStorage.removeItem('tasks');
+    } else {
+      const updatedTasks = tasks.filter((item) => item.id !== id);
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    }
 
     setTasks(getTasks);
   };
