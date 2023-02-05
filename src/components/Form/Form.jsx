@@ -15,13 +15,12 @@ const Form = ({ title }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [taskDoesNotExist, setTaskDoesNotExist] = useState(false);
+  const [allTasks] = useState(JSON.parse(localStorage.getItem('tasks')));
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const allTasks = JSON.parse(localStorage.getItem('tasks'));
     // If the task existed keep the old ID else create a new one
     const idLocal = formValues.id ? formValues.id : UUID4();
-
     const taskToWriteToLocalStorage = {
       ...formValues,
       id: idLocal,
@@ -35,8 +34,10 @@ const Form = ({ title }) => {
       localStorage.setItem('tasks', JSON.stringify(updatedAllTasks));
       // Otherwise if there are items in the localStorage then add the new task
     } else if (allTasks) {
-      allTasks.push(taskToWriteToLocalStorage);
-      localStorage.setItem('tasks', JSON.stringify(allTasks));
+      const tasks = allTasks;
+      tasks.push(taskToWriteToLocalStorage);
+
+      localStorage.setItem('tasks', JSON.stringify(tasks));
       // If no items are present in localStorage create a new array with the item
     } else {
       localStorage.setItem(
@@ -64,7 +65,6 @@ const Form = ({ title }) => {
 
   useEffect(() => {
     if (id) {
-      const allTasks = JSON.parse(localStorage.getItem('tasks'));
       const editTask = allTasks.find((task) => task.id === id);
 
       if (editTask) {
